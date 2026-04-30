@@ -321,8 +321,8 @@
                         </ul>
                     </div>
                     <div class="flex gap-4 items-center">
-                        <div class="p-3 bg-yellow-50 rounded-lg group-hover:bg-yellow-100 transition-colors">
-                            <svg class="w-6 h-6 text-[#facc15]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        <div class="p-3 bg-emerald-50 rounded-lg group-hover:bg-emerald-100 transition-colors">
+                            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                         </div>
                         <div>
                             <h4 class="text-slate-900 text-xs font-black uppercase tracking-widest">Maintenance Savings</h4>
@@ -447,10 +447,9 @@
             const servHrsBaseline = getVal('staff-serv-hours-curr');
             const servDailyMinSaved = getVal('staff-serv-daily-reclaim');
 
-            // 1. Dollar Utilization Gain
-            const baselineRev = annualRev > 0 ? annualRev : (oec * (dc/100));
-            const dollarUteLift = dc > 0 ? (dt - dc) / dc : 0; 
-            const gainD = Math.max(0, baselineRev * dollarUteLift);
+            // 1. Dollar Utilization Gain (FIXED: Now strictly driven by OEC)
+            // Gain = (Target % - Current %) of OEC
+            const gainD = Math.max(0, ((dt - dc) / 100) * oec);
 
             // 2. Maintenance Savings (12% Benchmark)
             const mSavings = Math.max(0, mSpend * 0.12);
