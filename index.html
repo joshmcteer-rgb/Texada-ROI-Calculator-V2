@@ -125,37 +125,41 @@
         }
 
         /* --- PDF PRINT-SPECIFIC CSS --- */
-        /* This class is applied only to the cloned element used for PDF generation */
-        .pdf-capture-frame {
-            width: 1000px !important;
-            padding: 40px !important;
+        .pdf-export-mode {
+            width: 850px !important; /* Fixed width for Letter ratio */
+            padding: 30px !important;
             background: white !important;
+            box-shadow: none !important;
             margin: 0 !important;
         }
 
-        .pdf-capture-frame .grid {
+        .pdf-export-mode .grid {
             display: grid !important;
             grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
         }
 
-        .pdf-capture-frame .lg\:col-span-5 { grid-column: span 5 / span 12 !important; }
-        .pdf-capture-frame .lg\:col-span-7 { grid-column: span 7 / span 12 !important; }
+        .pdf-export-mode .lg\:col-span-5 { grid-column: span 5 / span 12 !important; }
+        .pdf-export-mode .lg\:col-span-7 { grid-column: span 7 / span 12 !important; }
 
-        .pdf-capture-frame .no-print, .pdf-capture-frame .tooltip {
+        .pdf-export-mode .no-print, .pdf-export-mode .tooltip {
             display: none !important;
         }
 
-        .pdf-capture-frame .result-item {
+        .pdf-export-mode .result-item {
             box-shadow: none !important;
             transform: none !important;
+            padding: 1rem !important;
             border: 1px solid #e2e8f0 !important;
             border-left: 6px solid #facc15 !important;
+            margin-bottom: 0.5rem !important;
         }
 
-        .pdf-capture-frame #total-val {
-            font-size: 5rem !important;
-            line-height: 1 !important;
+        .pdf-export-mode #total-val {
+            font-size: 4rem !important;
         }
+
+        .pdf-export-mode .space-y-6 > * + * { margin-top: 1rem !important; }
+        .pdf-export-mode .mb-10 { margin-bottom: 1.5rem !important; }
     </style>
 </head>
 <body class="p-4 md:p-12 flex items-center justify-center">
@@ -168,7 +172,7 @@
                     <img src="https://cdn.news.ararental.org/wp-content/uploads/2024/08/05161505/Texada-Software-thumbnail-600x338.jpg" alt="Texada Logo" class="h-full w-auto object-contain" onerror="this.parentElement.innerHTML='<span class=\'text-3xl font-black tracking-tighter text-slate-900\'>TEXADA</span>'">
                 </div>
                 <!-- Tagline styled to match 'Complete Workflow Management' -->
-                <p class="text-slate-900 text-[14px] font-black uppercase tracking-tight text-center lg:text-left max-w-sm leading-tight">
+                <p class="text-slate-900 text-[14px] font-black uppercase tracking-tight text-center lg:text-left max-w-md leading-tight">
                     Texada’s Equipment Rental Management Software - ROI Calculator
                 </p>
             </div>
@@ -278,16 +282,16 @@
                         <span class="w-2 h-2 bg-[#facc15] rounded-full mr-3 animate-pulse"></span>
                         Texada Standards
                     </h4>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="flex justify-between items-center text-[10px]">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="flex flex-col text-[9px] text-center border-r border-slate-800 pr-2">
                             <span class="text-slate-400 font-bold uppercase">Dollar UTE</span>
                             <span class="text-[#facc15] font-black">+10.0% Pts</span>
                         </div>
-                        <div class="flex justify-between items-center text-[10px]">
+                        <div class="flex flex-col text-[9px] text-center border-r border-slate-800 px-2">
                             <span class="text-slate-400 font-bold uppercase">Billing</span>
                             <span class="text-[#facc15] font-black">50% Gain</span>
                         </div>
-                        <div class="flex justify-between items-center text-[10px]">
+                        <div class="flex flex-col text-[9px] text-center pl-2">
                             <span class="text-slate-400 font-bold uppercase">Tech Prod.</span>
                             <span class="text-[#facc15] font-black">30m / Day</span>
                         </div>
@@ -577,18 +581,17 @@
         const downloadPDF = () => {
             const originalElement = document.getElementById('capture-area');
             
-            // Create a clone for PDF generation to avoid screen-size dependencies
+            // Create a temporary hidden clone for a "Letter-sized" capture
             const clone = originalElement.cloneNode(true);
-            clone.classList.add('pdf-capture-frame');
+            clone.classList.add('pdf-export-mode');
             
-            // Re-copy all current input values because cloneNode doesn't copy dynamic values
+            // Copy dynamic values (inputs/content) which cloneNode misses
             const originalInputs = originalElement.querySelectorAll('input');
             const clonedInputs = clone.querySelectorAll('input');
             originalInputs.forEach((input, index) => {
                 clonedInputs[index].value = input.value;
             });
-            
-            // Set cloned values for calculated items
+
             clone.querySelector('#total-val').innerText = originalElement.querySelector('#total-val').innerText;
             clone.querySelector('#res-dollar').innerText = originalElement.querySelector('#res-dollar').innerText;
             clone.querySelector('#res-admin-val').innerText = originalElement.querySelector('#res-admin-val').innerText;
@@ -596,30 +599,34 @@
             clone.querySelector('#res-shop-val').innerText = originalElement.querySelector('#res-shop-val').innerText;
             clone.querySelector('#res-shop-hrs').innerText = originalElement.querySelector('#res-shop-hrs').innerText;
 
-            const container = document.createElement('div');
-            container.style.position = 'fixed';
-            container.style.left = '-9999px';
-            container.appendChild(clone);
-            document.body.appendChild(container);
+            // Move clone off-screen to render correctly
+            const wrapper = document.createElement('div');
+            wrapper.style.position = 'fixed';
+            wrapper.style.left = '-2000px';
+            wrapper.style.top = '0';
+            wrapper.appendChild(clone);
+            document.body.appendChild(wrapper);
 
             const opt = {
                 margin: 0,
                 filename: 'Texada_ROI_Assessment.pdf',
                 image: { type: 'jpeg', quality: 1.0 },
                 html2canvas: { 
-                    scale: 2, 
+                    scale: 2.5, 
                     useCORS: true, 
                     letterRendering: true,
-                    width: 1000
+                    width: 800, // Forces the capture width to Letter aspect ratio
+                    scrollX: 0,
+                    scrollY: 0
                 },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
 
             html2pdf().set(opt).from(clone).save().then(() => {
-                document.body.removeChild(container);
+                document.body.removeChild(wrapper);
             }).catch(err => {
-                console.error("PDF Error:", err);
-                document.body.removeChild(container);
+                console.error("PDF Export Error:", err);
+                document.body.removeChild(wrapper);
             });
         };
 
