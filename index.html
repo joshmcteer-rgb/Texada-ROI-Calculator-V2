@@ -124,51 +124,45 @@
             transition: all 0.5s ease-out;
         }
 
-        /* --- PDF EXPORT OVERRIDES --- */
-        /* Forces the layout to remain "Desktop" side-by-side during capture */
-        .pdf-export-active {
-            background-color: #ffffff !important;
+        /* --- PDF PRINT-SPECIFIC CSS --- */
+        @media print {
+            .no-print { display: none !important; }
         }
-        
-        .pdf-export-active #capture-area {
-            width: 1024px !important;
-            max-width: none !important;
-            box-shadow: none !important;
-            border-radius: 0 !important;
-            padding: 30px !important;
+
+        .pdf-mode {
+            background-color: white !important;
+            padding: 0 !important;
             margin: 0 !important;
         }
 
-        .pdf-export-active .grid {
-            display: grid !important;
-            grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+        .pdf-mode .calculator-container {
+            width: 1000px !important;
+            max-width: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            padding: 40px !important;
+            margin: 0 auto !important;
         }
 
-        .pdf-export-active .lg\:col-span-5 { grid-column: span 5 / span 12 !important; }
-        .pdf-export-active .lg\:col-span-7 { grid-column: span 7 / span 12 !important; }
+        /* Force 2-column layout in PDF regardless of window width */
+        .pdf-mode .grid-cols-1 {
+            grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+        }
+        .pdf-mode .lg\:col-span-5 { grid-column: span 5 / span 12 !important; }
+        .pdf-mode .lg\:col-span-7 { grid-column: span 7 / span 12 !important; }
 
-        .pdf-export-active .tooltip, 
-        .pdf-export-active .no-print {
+        .pdf-mode .tooltip, .pdf-mode .no-print {
             display: none !important;
         }
 
-        .pdf-export-active .result-item {
+        .pdf-mode .result-item {
             box-shadow: none !important;
             transform: none !important;
-            border: 1px solid #e2e8f0 !important;
-            border-left: 6px solid #facc15 !important;
-            padding: 1rem !important;
+            padding: 1.25rem !important;
         }
 
-        .pdf-export-active #total-val {
-            font-size: 4rem !important;
-        }
-
-        .pdf-export-active .input-box {
-            background-color: #f8fafc !important;
-            border: 1px solid #cbd5e1 !important;
-            font-size: 0.85rem !important;
-            padding: 0.5rem !important;
+        .pdf-mode #total-val {
+            font-size: 4.5rem !important;
         }
     </style>
 </head>
@@ -404,7 +398,7 @@
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Rapid Inspections:</strong> Standardized digital checklists put equipment back in the "Ready-to-Rent" pool 15-20% faster.</span>
+                                <span><strong class="text-white">Rapid Inspections:</strong> Standardized digital checklists put equipment back in the "Ready-to-Rent" pool 15-20% faster than manual paper processes.</span>
                             </li>
                         </ul>
                     </div>
@@ -593,7 +587,7 @@
 
         const downloadPDF = () => {
             const body = document.body;
-            body.classList.add('pdf-export-active'); 
+            body.classList.add('pdf-mode'); 
             
             const element = document.getElementById('capture-area');
             
@@ -602,7 +596,7 @@
                 filename: 'Texada_ROI_Assessment.pdf',
                 image: { type: 'jpeg', quality: 1.0 },
                 html2canvas: { 
-                    scale: 3, 
+                    scale: 2.5, 
                     useCORS: true, 
                     letterRendering: true,
                     scrollY: 0,
@@ -612,10 +606,14 @@
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
 
+            // Scroll to top before capture to ensure layout is fresh
+            window.scrollTo(0,0);
+
             html2pdf().set(opt).from(element).save().then(() => {
-                body.classList.remove('pdf-export-active');
+                body.classList.remove('pdf-mode');
             }).catch(err => {
-                body.classList.remove('pdf-export-active');
+                console.error("PDF Error:", err);
+                body.classList.remove('pdf-mode');
             });
         };
 
