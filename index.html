@@ -124,14 +124,15 @@
             transition: all 0.5s ease-out;
         }
 
-        /* --- PDF EXPORT STYLING --- */
-        /* Applied to body during PDF generation */
-        .pdf-generating {
+        /* --- PDF PRINT OVERRIDES --- */
+        /* Forces desktop-like layout during capture */
+        .pdf-export-mode {
             background-color: #ffffff !important;
+            min-height: auto !important;
         }
 
-        .pdf-generating .calculator-container {
-            width: 1024px !important; /* Fixed width for consistent rendering */
+        .pdf-export-mode #capture-area {
+            width: 1024px !important;
             max-width: none !important;
             box-shadow: none !important;
             border-radius: 0 !important;
@@ -139,28 +140,28 @@
             padding: 40px !important;
         }
 
-        /* Force 2-column grid in PDF even if screen is small */
-        .pdf-generating .grid-cols-1 {
+        /* Force columns to stay side-by-side */
+        .pdf-export-mode .grid-cols-1 {
             display: grid !important;
             grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
         }
 
-        .pdf-generating .lg\:col-span-5 { grid-column: span 5 / span 12 !important; }
-        .pdf-generating .lg\:col-span-7 { grid-column: span 7 / span 12 !important; }
+        .pdf-export-mode .lg\:col-span-5 { grid-column: span 5 / span 12 !important; }
+        .pdf-export-mode .lg\:col-span-7 { grid-column: span 7 / span 12 !important; }
 
-        .pdf-generating .no-print, 
-        .pdf-generating .tooltip {
+        .pdf-export-mode .no-print, 
+        .pdf-export-mode .tooltip {
             display: none !important;
         }
 
-        .pdf-generating .result-item {
+        .pdf-export-mode .result-item {
             box-shadow: none !important;
             transform: none !important;
             border: 1px solid #e2e8f0 !important;
             border-left: 6px solid #facc15 !important;
         }
 
-        .pdf-generating #total-val {
+        .pdf-export-mode #total-val {
             font-size: 5rem !important;
         }
     </style>
@@ -174,7 +175,7 @@
                 <div class="h-32 md:h-40 mb-2">
                     <img src="https://cdn.news.ararental.org/wp-content/uploads/2024/08/05161505/Texada-Software-thumbnail-600x338.jpg" alt="Texada Logo" class="h-full w-auto object-contain" onerror="this.parentElement.innerHTML='<span class=\'text-3xl font-black tracking-tighter text-slate-900\'>TEXADA</span>'">
                 </div>
-                <!-- Tagline styled to match 'Complete Workflow Management' footer header -->
+                <!-- Tagline styled to match 'Complete Workflow Management' exactly -->
                 <p class="text-slate-900 text-[14px] font-black uppercase tracking-tight text-center lg:text-left max-w-sm leading-tight">
                     Texada’s Equipment Rental Management Software - ROI Calculator
                 </p>
@@ -516,7 +517,7 @@
             };
         };
 
-        const updateUI = (isInitial = false) => {
+        const updateUI = () => {
             const results = calculateGains();
             document.getElementById('total-val').innerText = currency(results.total);
             document.getElementById('res-dollar').innerText = currency(results.dollar);
@@ -563,35 +564,39 @@
         };
 
         const downloadPDF = () => {
-            // Apply PDF mode to body to trigger CSS overrides
-            document.body.classList.add('pdf-generating');
-            
-            const element = document.getElementById('capture-area');
-            
-            // Standard options for a clean capture
-            const opt = {
-                margin: 0,
-                filename: 'Texada_ROI_Assessment.pdf',
-                image: { type: 'jpeg', quality: 1.0 },
-                html2canvas: { 
-                    scale: 3, 
-                    useCORS: true, 
-                    letterRendering: true,
-                    width: 1024,
-                    windowWidth: 1024,
-                    scrollX: 0,
-                    scrollY: 0
-                },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
+            const container = document.getElementById('capture-area');
+            if (!container) return;
 
-            // Capture and save, then remove class
-            html2pdf().set(opt).from(element).save().then(() => {
-                document.body.classList.remove('pdf-generating');
-            }).catch(err => {
-                console.error("PDF Error:", err);
-                document.body.classList.remove('pdf-generating');
-            });
+            // Step 1: Lock the layout for high-res desktop capture
+            document.body.classList.add('pdf-generating');
+            window.scrollTo(0,0);
+
+            // Step 2: Use a slight delay to ensure browser reflow is complete before capture
+            setTimeout(() => {
+                const opt = {
+                    margin: 0.25,
+                    filename: 'Texada_ROI_Assessment.pdf',
+                    image: { type: 'jpeg', quality: 1.0 },
+                    html2canvas: { 
+                        scale: 2.5, 
+                        useCORS: true, 
+                        letterRendering: true,
+                        width: 1024,
+                        windowWidth: 1024,
+                        scrollX: 0,
+                        scrollY: 0,
+                        logging: false
+                    },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+
+                html2pdf().set(opt).from(container).save().then(() => {
+                    document.body.classList.remove('pdf-generating');
+                }).catch(err => {
+                    console.error("PDF generation failed", err);
+                    document.body.classList.remove('pdf-generating');
+                });
+            }, 500);
         };
 
         const init = () => {
@@ -619,7 +624,7 @@
             const pdfBtn = document.getElementById('download-pdf');
             if (pdfBtn) pdfBtn.onclick = downloadPDF;
             
-            updateUI(true);
+            updateUI();
         };
 
         init();
