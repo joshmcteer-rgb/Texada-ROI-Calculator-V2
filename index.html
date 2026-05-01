@@ -124,177 +124,57 @@
             transition: all 0.5s ease-out;
         }
 
-        /* --- PDF EXPORT OVERRIDES --- */
-        /* This layer is purely for high-fidelity PDF capture */
-        #pdf-export-layer {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-            width: 800px;
-            background: white;
-            padding: 30px;
+        /* --- PDF EXPORT STYLING --- */
+        /* Applied to body during PDF generation */
+        .pdf-generating {
+            background-color: #ffffff !important;
         }
 
-        .pdf-report-box {
-            border: 1px solid #e2e8f0;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+        .pdf-generating .calculator-container {
+            width: 1024px !important; /* Fixed width for consistent rendering */
+            max-width: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+            padding: 40px !important;
         }
 
-        .pdf-label {
-            font-size: 9px;
-            font-weight: 800;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        /* Force 2-column grid in PDF even if screen is small */
+        .pdf-generating .grid-cols-1 {
+            display: grid !important;
+            grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
         }
 
-        .pdf-value {
-            font-size: 14px;
-            font-weight: 900;
-            color: #0f172a;
+        .pdf-generating .lg\:col-span-5 { grid-column: span 5 / span 12 !important; }
+        .pdf-generating .lg\:col-span-7 { grid-column: span 7 / span 12 !important; }
+
+        .pdf-generating .no-print, 
+        .pdf-generating .tooltip {
+            display: none !important;
         }
 
-        .pdf-result-card {
-            border-left: 5px solid #facc15;
-            background: #ffffff;
-            border-top: 1px solid #f1f5f9;
-            border-right: 1px solid #f1f5f9;
-            border-bottom: 1px solid #f1f5f9;
-            padding: 12px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .pdf-generating .result-item {
+            box-shadow: none !important;
+            transform: none !important;
+            border: 1px solid #e2e8f0 !important;
+            border-left: 6px solid #facc15 !important;
+        }
+
+        .pdf-generating #total-val {
+            font-size: 5rem !important;
         }
     </style>
 </head>
 <body class="p-4 md:p-12 flex items-center justify-center">
 
-    <!-- HIDDEN PDF TEMPLATE -->
-    <div id="pdf-export-layer">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; border-bottom: 4px solid #facc15; padding-bottom: 20px;">
-            <div>
-                <img src="https://cdn.news.ararental.org/wp-content/uploads/2024/08/05161505/Texada-Software-thumbnail-600x338.jpg" style="height: 80px; margin-bottom: 10px;">
-                <p style="color: #0f172a; font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em;">
-                    Texada’s Equipment Rental Management Software - ROI Calculator
-                </p>
-            </div>
-            <div style="text-align: right;">
-                <p style="color: #facc15; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 5px;">Total Projected Annual Value</p>
-                <p id="pdf-total-val" style="font-size: 50px; font-weight: 900; color: #0f172a; line-height: 1;">$0</p>
-            </div>
-        </div>
-
-        <div style="display: flex; gap: 30px;">
-            <!-- Left Side -->
-            <div style="flex: 1;">
-                <h3 style="font-size: 12px; font-weight: 900; text-transform: uppercase; color: #0f172a; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Fleet Discovery</h3>
-                
-                <div class="pdf-report-box" style="background: #f8fafc;">
-                    <p class="pdf-label" style="margin-bottom: 10px;">Financial Baseline</p>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                        <span class="pdf-label" style="font-size: 8px;">Fleet OEC:</span>
-                        <span class="pdf-value" id="pdf-oec-val">$0</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                        <span class="pdf-label" style="font-size: 8px;">Rental Revenue:</span>
-                        <span class="pdf-value" id="pdf-rev-val">$0</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <span class="pdf-label" style="font-size: 8px;">Maintenance:</span>
-                        <span class="pdf-value" id="pdf-maint-val">$0</span>
-                    </div>
-                </div>
-
-                <div class="pdf-report-box">
-                    <p class="pdf-label" style="margin-bottom: 10px;">Performance Targets</p>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                        <span class="pdf-label" style="font-size: 8px;">Current Dollar Ute:</span>
-                        <span class="pdf-value" id="pdf-ute-curr">0%</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <span class="pdf-label" style="font-size: 8px;">Target Dollar Ute:</span>
-                        <span class="pdf-value" id="pdf-ute-target" style="color: #ca8a04;">0%</span>
-                    </div>
-                </div>
-
-                <div style="background: #0f172a; color: white; padding: 15px; border-radius: 10px;">
-                    <p style="font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #facc15; margin-bottom: 10px;">Texada Standards</p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div>
-                            <p style="font-size: 7px; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Dollar Ute</p>
-                            <p style="font-size: 11px; font-weight: 900;">+10.0% Pts</p>
-                        </div>
-                        <div>
-                            <p style="font-size: 7px; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Billing Efficiency</p>
-                            <p style="font-size: 11px; font-weight: 900;">50% Gain</p>
-                        </div>
-                        <div>
-                            <p style="font-size: 7px; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Tech Productivity</p>
-                            <p style="font-size: 11px; font-weight: 900;">30m / Day</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Side -->
-            <div style="flex: 1.4;">
-                <h3 style="font-size: 12px; font-weight: 900; text-transform: uppercase; color: #0f172a; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Projected Annual Impact</h3>
-                
-                <div class="pdf-result-card">
-                    <div>
-                        <p class="pdf-label" style="font-size: 10px;">Increase in Revenue</p>
-                        <p style="font-size: 8px; font-weight: 600; color: #64748b;">Financial Growth Lift</p>
-                    </div>
-                    <p id="pdf-res-dollar" style="font-size: 28px; font-weight: 900; color: #0f172a;">$0</p>
-                </div>
-
-                <div class="pdf-result-card">
-                    <div>
-                        <p class="pdf-label" style="font-size: 10px;">Labor Productivity</p>
-                        <p style="font-size: 8px; font-weight: 600; color: #64748b;">Billing & Admin Capacity</p>
-                    </div>
-                    <div style="text-align: right;">
-                        <p id="pdf-res-admin-val" style="font-size: 28px; font-weight: 900; color: #0f172a;">$0</p>
-                        <p id="pdf-res-admin-hrs" style="font-size: 8px; font-weight: 800; color: #94a3b8; text-transform: uppercase;">0 Hrs Reclaimed</p>
-                    </div>
-                </div>
-
-                <div class="pdf-result-card">
-                    <div>
-                        <p class="pdf-label" style="font-size: 10px;">Shop Productivity</p>
-                        <p style="font-size: 8px; font-weight: 600; color: #64748b;">Additional Billable Work</p>
-                    </div>
-                    <div style="text-align: right;">
-                        <p id="pdf-res-shop-val" style="font-size: 28px; font-weight: 900; color: #0f172a;">$0</p>
-                        <p id="pdf-res-shop-hrs" style="font-size: 8px; font-weight: 800; color: #94a3b8; text-transform: uppercase;">0 Hrs Reclaimed</p>
-                    </div>
-                </div>
-
-                <div style="margin-top: 20px; background: #f8fafc; border: 2px dashed #e2e8f0; padding: 15px; border-radius: 10px;">
-                    <p style="font-size: 10px; font-weight: 900; color: #0f172a; text-transform: uppercase; margin-bottom: 5px;">Complete Workflow Management</p>
-                    <p style="font-size: 8px; color: #64748b; line-height: 1.4;">Texada delivers purpose-built software that transforms how equipment rental businesses operate. From inventory tracking and field service to e-commerce and analytics, our connected platform helps you manage every asset and maximize every opportunity.</p>
-                </div>
-            </div>
-        </div>
-
-        <div style="margin-top: 30px; border-top: 1px solid #f1f5f9; padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <p style="font-size: 8px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">Secure Business Assessment</p>
-            <p style="font-size: 8px; font-weight: 800; color: #94a3b8;">© 2026 Texada Software | All Rights Reserved</p>
-        </div>
-    </div>
-
-    <!-- MAIN INTERACTIVE UI -->
-    <div class="calculator-container">
+    <div id="capture-area" class="calculator-container">
         <!-- Header -->
         <div class="flex flex-col lg:flex-row justify-between items-center mb-10 md:mb-12 gap-8">
             <div class="flex flex-col items-center lg:items-start">
                 <div class="h-32 md:h-40 mb-2">
                     <img src="https://cdn.news.ararental.org/wp-content/uploads/2024/08/05161505/Texada-Software-thumbnail-600x338.jpg" alt="Texada Logo" class="h-full w-auto object-contain" onerror="this.parentElement.innerHTML='<span class=\'text-3xl font-black tracking-tighter text-slate-900\'>TEXADA</span>'">
                 </div>
-                <!-- Tagline strictly matching 'Complete Workflow Management' style -->
+                <!-- Tagline styled to match 'Complete Workflow Management' footer header -->
                 <p class="text-slate-900 text-[14px] font-black uppercase tracking-tight text-center lg:text-left max-w-sm leading-tight">
                     Texada’s Equipment Rental Management Software - ROI Calculator
                 </p>
@@ -613,13 +493,16 @@
             const servDailyMinSaved = getVal('staff-serv-daily-reclaim');
             const servRecovery = getVal('staff-serv-recovery');
 
+            // 1. REVENUE INCREASE
             const actualNetBaseRev = Math.max(0, annualRev - mSpend);
             const targetDollarUteRev = (dt / 100) * oec;
             const gainD = Math.max(0, targetDollarUteRev - actualNetBaseRev);
 
+            // 2. Admin Labor Gain
             const accHoursSavedYear = accCount * accHrsBaseline * (accEffGain / 100) * 52;
             const adminVal = accHoursSavedYear * 35;
 
+            // 3. Shop Productivity Gain
             const shopHoursSavedYear = servCount * (servDailyMinSaved / 60) * 5 * 52;
             const shopVal = shopHoursSavedYear * servBillRate * (servRecovery / 100);
 
@@ -680,34 +563,35 @@
         };
 
         const downloadPDF = () => {
-            // Update the hidden PDF layer with current data
-            const results = calculateGains();
-            const getVal = (id) => document.getElementById(id).value;
+            // Apply PDF mode to body to trigger CSS overrides
+            document.body.classList.add('pdf-generating');
             
-            document.getElementById('pdf-total-val').innerText = currency(results.total);
-            document.getElementById('pdf-oec-val').innerText = currency(getVal('oec'));
-            document.getElementById('pdf-rev-val').innerText = currency(getVal('annual-rev'));
-            document.getElementById('pdf-maint-val').innerText = currency(getVal('m-spend'));
-            document.getElementById('pdf-ute-curr').innerText = getVal('dollar-curr') + '%';
-            document.getElementById('pdf-ute-target').innerText = getVal('dollar-target') + '%';
+            const element = document.getElementById('capture-area');
             
-            document.getElementById('pdf-res-dollar').innerText = currency(results.dollar);
-            document.getElementById('pdf-res-admin-val').innerText = currency(results.adminVal);
-            document.getElementById('pdf-res-admin-hrs').innerText = Math.round(results.adminHours).toLocaleString() + " Hrs Reclaimed";
-            document.getElementById('pdf-res-shop-val').innerText = currency(results.shopVal);
-            document.getElementById('pdf-res-shop-hrs').innerText = Math.round(results.shopHours).toLocaleString() + " Hrs Reclaimed";
-
-            const element = document.getElementById('pdf-export-layer');
-            
+            // Standard options for a clean capture
             const opt = {
-                margin: 0.2,
+                margin: 0,
                 filename: 'Texada_ROI_Assessment.pdf',
                 image: { type: 'jpeg', quality: 1.0 },
-                html2canvas: { scale: 3, useCORS: true, letterRendering: true },
+                html2canvas: { 
+                    scale: 3, 
+                    useCORS: true, 
+                    letterRendering: true,
+                    width: 1024,
+                    windowWidth: 1024,
+                    scrollX: 0,
+                    scrollY: 0
+                },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
 
-            html2pdf().set(opt).from(element).save();
+            // Capture and save, then remove class
+            html2pdf().set(opt).from(element).save().then(() => {
+                document.body.classList.remove('pdf-generating');
+            }).catch(err => {
+                console.error("PDF Error:", err);
+                document.body.classList.remove('pdf-generating');
+            });
         };
 
         const init = () => {
