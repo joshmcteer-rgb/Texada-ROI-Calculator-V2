@@ -238,7 +238,7 @@
                                 <span class="text-[11px] font-extrabold text-slate-700 uppercase tracking-tight">Dollar Ute %</span>
                                 <div class="field-tooltip-wrapper no-print">
                                     <svg class="w-3 h-3 text-slate-400 cursor-help" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                                    <div class="field-tooltip">Financial yield: (Annual Revenue - Maintenance) / OEC. We auto-populate a +10% target.</div>
+                                    <div class="field-tooltip">Financial yield: (Annual Revenue - Maintenance) / OEC. We auto-populate a +5% target.</div>
                                 </div>
                             </div>
                             <input type="text" id="dollar-curr" class="input-box shadow-sm bg-slate-100/50" readonly>
@@ -380,337 +380,351 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Right: Results -->
+                <div class="lg:col-span-7 flex flex-col gap-4">
+                    
+                    <!-- Increase in Revenue Card -->
+                    <div class="result-item group">
+                        <div class="tooltip">
+                            <h5 class="text-[#facc15] text-xs font-black uppercase tracking-widest mb-3">Drivers of Revenue Growth</h5>
+                            <ul class="text-[11px] text-slate-400 space-y-3 list-none">
+                                <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
+                                    <span class="text-[#facc15] mt-1">●</span>
+                                    <span><strong class="text-white">Compounded UTE:</strong> Financial yield lift (Dollar UTE) combined with increased physical asset availability through faster turnaround.</span>
+                                </li>
+                                <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
+                                    <span class="text-[#facc15] mt-1">●</span>
+                                    <span><strong class="text-white">Stopped Leakage:</strong> Automatically triggers billing for environmental fees and cleaning that were previously uncaptured.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-[#facc15] mt-1">●</span>
+                                    <span><strong class="text-white">Margin Protection:</strong> Eliminates unauthorized manual discounts and rate overrides through centralized contract integrity.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <div class="p-3 bg-yellow-50 rounded-lg">
+                                <svg class="w-6 h-6 text-[#facc15]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-slate-900 text-xs font-black uppercase tracking-widest">Revenue Growth</h4>
+                                <p class="text-slate-400 text-[10px] font-bold mt-0.5 uppercase tracking-tight">Utilization Lift</p>
+                            </div>
+                        </div>
+                        <div id="res-dollar" class="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter">$0</div>
+                    </div>
+
+                    <!-- Revenue Recovery Card -->
+                    <div class="result-item group">
+                        <div class="tooltip">
+                            <h5 class="text-[#facc15] text-xs font-black uppercase tracking-widest mb-3">Stopped Leakage & Damage Recovery</h5>
+                            <ul class="text-[11px] text-slate-400 space-y-3 list-none">
+                                <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
+                                    <span class="text-[#facc15] mt-1">●</span>
+                                    <span><strong class="text-white">Damage Capture:</strong> 2.5% of returns involve unbilled damage. Texada ensures these $1,000 incidents are billed.</span>
+                                </li>
+                                <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
+                                    <span class="text-[#facc15] mt-1">●</span>
+                                    <span><strong class="text-white">Fuel Reclaim:</strong> Typical Texada customers see a 15% lift in fuel billing accuracy through automated meter logging.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-[#facc15] mt-1">●</span>
+                                    <span><strong class="text-white">Audit Protection:</strong> Eliminate manual estimation errors with direct digital integration from return inspections.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <div class="p-3 bg-yellow-50 rounded-lg">
+                                <svg class="w-6 h-6 text-[#facc15]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-slate-900 text-xs font-black uppercase tracking-widest">Revenue Recovery</h4>
+                                <p class="text-slate-400 text-[10px] font-bold mt-0.5 uppercase tracking-tight">Fuel & Leakage Capture</p>
+                            </div>
+                        </div>
+                        <div id="res-recovery" class="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter">$0</div>
+                    </div>
+
+                    <!-- Labor Productivity Card -->
+                    <div class="result-item group">
+                        <div class="tooltip">
+                            <h5 class="text-[#facc15] text-xs font-black uppercase tracking-widest mb-3">Eliminating the "Manual Entry Tax"</h5>
+                            <ul class="text-[11px] text-slate-400 space-y-3 list-none">
+                                <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
+                                    <span class="text-[#facc15] mt-1">●</span>
+                                    <span><strong class="text-white">Single-Source Data:</strong> Sales and rental contracts sync instantly to billing hub, eliminating re-typing data.</span>
+                                </li>
+                                <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
+                                    <span class="text-[#facc15] mt-1">●</span>
+                                    <span><strong class="text-white">Automated Reconciliation:</strong> Digital documents and signatures are stored centrally, removing hours spent "chasing paper".</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-[#facc15] mt-1">●</span>
+                                    <span><strong class="text-white">Exception Management:</strong> System validation allows staff to focus only on discrepant invoices, speeding up billing.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <div class="p-3 bg-yellow-50 rounded-lg">
+                                <svg class="w-6 h-6 text-[#facc15]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-slate-900 text-xs font-black uppercase tracking-widest">Labor Productivity</h4>
+                                <p class="text-slate-400 text-[10px] font-bold mt-0.5 uppercase tracking-tight">Billing & Admin Capacity</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div id="res-admin-val" class="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter">$0</div>
+                            <div id="res-admin-hrs" class="text-[11px] font-bold text-slate-400 uppercase tracking-tight">0 Hrs Reclaimed</div>
+                        </div>
+                    </div>
+
+                    <!-- Shop Productivity Card -->
+                    <div class="result-item group">
+                        <div class="tooltip">
+                            <h5 class="text-[#facc15] text-xs font-black uppercase tracking-widest mb-3">Maximizing Billable Wrench Time</h5>
+                            <ul class="text-[11px] text-slate-400 space-y-3 list-none">
+                                <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
+                                    <span class="text-[#facc15] mt-1">●</span>
+                                    <span><strong class="text-white">Mobile Work Orders:</strong> Techs update logs, photos, and request parts via mobile devices directly from the asset.</span>
+                                </li>
+                                <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
+                                    <span class="text-[#facc15] mt-1">●</span>
+                                    <span><strong class="text-white">Real-Time Parts Linkage:</strong> Mechanics can see parts availability instantly, preventing jobs starting that cannot be finished.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-[#facc15] mt-1">●</span>
+                                    <span><strong class="text-white">Rapid Inspections:</strong> Standardized digital checklists put equipment back in the "Ready-to-Rent" pool 15-20% faster.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <div class="p-3 bg-yellow-50 rounded-lg">
+                                <svg class="w-6 h-6 text-[#facc15]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-slate-900 text-xs font-black uppercase tracking-widest">Shop Productivity</h4>
+                                <p class="text-slate-400 text-[10px] font-bold mt-0.5 uppercase tracking-tight">Additional Billable Work</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div id="res-shop-val" class="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter">$0</div>
+                            <div id="res-shop-hrs" class="text-[11px] font-bold text-slate-400 uppercase tracking-tight">0 Hrs Reclaimed</div>
+                        </div>
+                    </div>
+
+                    <!-- Texada Standards Card -->
+                    <div class="p-8 bg-slate-900 rounded-2xl shadow-xl border border-slate-800">
+                        <h6 class="text-white text-[18px] font-black mb-4 uppercase tracking-tight">Texada Standards</h6>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="flex flex-col border-r border-slate-800 pr-4">
+                                <span class="text-slate-400 font-bold uppercase text-xs mb-1">Dollar UTE</span>
+                                <span class="text-[#facc15] font-black text-2xl tracking-tighter">+5% Pts</span>
+                            </div>
+                            <div class="flex flex-col pl-4">
+                                <span class="text-slate-400 font-bold uppercase text-xs mb-1">Billing Efficiency</span>
+                                <span class="text-[#facc15] font-black text-2xl tracking-tighter">50% Gain</span>
+                            </div>
+                            <div class="flex flex-col border-r border-slate-800 pr-4">
+                                <span class="text-slate-400 font-bold uppercase text-xs mb-1">Tech Productivity</span>
+                                <span class="text-[#facc15] font-black text-2xl tracking-tighter">30m / Day</span>
+                            </div>
+                            <div class="flex flex-col pl-4">
+                                <span class="text-slate-400 font-bold uppercase text-xs mb-1">Fuel Recovery</span>
+                                <span class="text-[#facc15] font-black text-2xl tracking-tighter">15% Gain</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Workflow Management Footer -->
+                    <div class="mt-4 p-6 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl">
+                        <h6 class="text-slate-900 text-[18px] font-black mb-2 uppercase tracking-tight">Complete Workflow Management</h6>
+                        <p class="text-slate-600 text-[14px] leading-relaxed font-medium">
+                            Texada delivers purpose-built software that transforms how equipment rental businesses operate. From inventory tracking and field service to e-commerce and analytics, our connected platform helps you manage every asset and maximize every opportunity.
+                        </p>
+                    </div>
+
+                    <!-- Built for Heavy Equipment Rental Section -->
+                    <div class="p-6 bg-slate-900 text-white rounded-2xl shadow-xl">
+                        <h6 class="text-[18px] font-black mb-4 uppercase tracking-tight">Built for Heavy Equipment Rental</h6>
+                        <div class="grid grid-cols-2 gap-y-6 gap-x-4">
+                            <div>
+                                <div class="text-2xl font-black text-[#facc15]">180+</div>
+                                <div class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">years experience</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-black text-[#facc15]">60k+</div>
+                                <div class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">users on platform</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-black text-[#facc15]">40+</div>
+                                <div class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">years serving industry</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-black text-[#facc15]">380+</div>
+                                <div class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">businesses on platform</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Right: Results -->
-            <div class="lg:col-span-7 flex flex-col gap-4">
+            <!-- Footer -->
+            <div class="mt-12 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] border-t border-slate-100 pt-8 gap-6">
+                <div class="flex items-center gap-3">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                    Secure Business Assessment
+                </div>
                 
-                <!-- Increase in Revenue Card -->
-                <div class="result-item group">
-                    <div class="tooltip">
-                        <h5 class="text-[#facc15] text-xs font-black uppercase tracking-widest mb-3">Drivers of Revenue Growth</h5>
-                        <ul class="text-[11px] text-slate-400 space-y-3 list-none">
-                            <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
-                                <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Compounded UTE:</strong> Financial yield lift (Dollar UTE) combined with increased physical asset availability through faster turnaround.</span>
-                            </li>
-                            <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
-                                <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Stopped Leakage:</strong> Automatically triggers billing for environmental fees and cleaning that were previously uncaptured.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Margin Protection:</strong> Eliminates unauthorized manual discounts and rate overrides through centralized contract integrity.</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="flex gap-4 items-center">
-                        <div class="p-3 bg-yellow-50 rounded-lg">
-                            <svg class="w-6 h-6 text-[#facc15]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <div>
-                            <h4 class="text-slate-900 text-xs font-black uppercase tracking-widest">Revenue Growth</h4>
-                            <p class="text-slate-400 text-[10px] font-bold mt-0.5 uppercase tracking-tight">Utilization Lift</p>
-                        </div>
-                    </div>
-                    <div id="res-dollar" class="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter">$0</div>
-                </div>
-
-                <!-- Revenue Recovery Card -->
-                <div class="result-item group">
-                    <div class="tooltip">
-                        <h5 class="text-[#facc15] text-xs font-black uppercase tracking-widest mb-3">Stopped Leakage & Damage Recovery</h5>
-                        <ul class="text-[11px] text-slate-400 space-y-3 list-none">
-                            <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
-                                <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Damage Capture:</strong> 2.5% of returns involve unbilled damage. Texada ensures these $1,000 incidents are billed.</span>
-                            </li>
-                            <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
-                                <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Fuel Reclaim:</strong> Typical Texada customers see a 15% lift in fuel billing accuracy through automated meter logging.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Audit Protection:</strong> Eliminate manual estimation errors with direct digital integration from return inspections.</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="flex gap-4 items-center">
-                        <div class="p-3 bg-yellow-50 rounded-lg">
-                            <svg class="w-6 h-6 text-[#facc15]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                        </div>
-                        <div>
-                            <h4 class="text-slate-900 text-xs font-black uppercase tracking-widest">Revenue Recovery</h4>
-                            <p class="text-slate-400 text-[10px] font-bold mt-0.5 uppercase tracking-tight">Fuel & Leakage Capture</p>
-                        </div>
-                    </div>
-                    <div id="res-recovery" class="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter">$0</div>
-                </div>
-
-                <!-- Labor Productivity Card -->
-                <div class="result-item group">
-                    <div class="tooltip">
-                        <h5 class="text-[#facc15] text-xs font-black uppercase tracking-widest mb-3">Eliminating the "Manual Entry Tax"</h5>
-                        <ul class="text-[11px] text-slate-400 space-y-3 list-none">
-                            <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
-                                <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Single-Source Data:</strong> Sales and rental contracts sync instantly to billing hub, eliminating re-typing data.</span>
-                            </li>
-                            <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
-                                <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Automated Reconciliation:</strong> Digital documents and signatures are stored centrally, removing hours spent "chasing paper".</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Exception Management:</strong> System validation allows staff to focus only on discrepant invoices, speeding up billing.</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="flex gap-4 items-center">
-                        <div class="p-3 bg-yellow-50 rounded-lg">
-                            <svg class="w-6 h-6 text-[#facc15]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                        </div>
-                        <div>
-                            <h4 class="text-slate-900 text-xs font-black uppercase tracking-widest">Labor Productivity</h4>
-                            <p class="text-slate-400 text-[10px] font-bold mt-0.5 uppercase tracking-tight">Billing & Admin Capacity</p>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <div id="res-admin-val" class="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter">$0</div>
-                        <div id="res-admin-hrs" class="text-[11px] font-bold text-slate-400 uppercase tracking-tight">0 Hrs Reclaimed</div>
-                    </div>
-                </div>
-
-                <!-- Shop Productivity Card -->
-                <div class="result-item group">
-                    <div class="tooltip">
-                        <h5 class="text-[#facc15] text-xs font-black uppercase tracking-widest mb-3">Maximizing Billable Wrench Time</h5>
-                        <ul class="text-[11px] text-slate-400 space-y-3 list-none">
-                            <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
-                                <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Mobile Work Orders:</strong> Techs update logs, photos, and request parts via mobile devices directly from the asset.</span>
-                            </li>
-                            <li class="flex items-start gap-2 border-b border-slate-800 pb-2">
-                                <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Real-Time Parts Linkage:</strong> Mechanics can see parts availability instantly, preventing jobs starting that cannot be finished.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-[#facc15] mt-1">●</span>
-                                <span><strong class="text-white">Rapid Inspections:</strong> Standardized digital checklists put equipment back in the "Ready-to-Rent" pool 15-20% faster.</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="flex gap-4 items-center">
-                        <div class="p-3 bg-yellow-50 rounded-lg">
-                            <svg class="w-6 h-6 text-[#facc15]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        </div>
-                        <div>
-                            <h4 class="text-slate-900 text-xs font-black uppercase tracking-widest">Shop Productivity</h4>
-                            <p class="text-slate-400 text-[10px] font-bold mt-0.5 uppercase tracking-tight">Additional Billable Work</p>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <div id="res-shop-val" class="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter">$0</div>
-                        <div id="res-shop-hrs" class="text-[11px] font-bold text-slate-400 uppercase tracking-tight">0 Hrs Reclaimed</div>
-                    </div>
-                </div>
-
-                <!-- Texada Standards Card -->
-                <div class="p-8 bg-slate-900 rounded-2xl shadow-xl border border-slate-800">
-                    <h6 class="text-white text-[18px] font-black mb-4 uppercase tracking-tight">Texada Standards</h6>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="flex flex-col border-r border-slate-800 pr-4">
-                            <span class="text-slate-400 font-bold uppercase text-xs mb-1">Dollar UTE</span>
-                            <span class="text-[#facc15] font-black text-2xl tracking-tighter">+10% Pts</span>
-                        </div>
-                        <div class="flex flex-col pl-4">
-                            <span class="text-slate-400 font-bold uppercase text-xs mb-1">Billing Efficiency</span>
-                            <span class="text-[#facc15] font-black text-2xl tracking-tighter">50% Gain</span>
-                        </div>
-                        <div class="flex flex-col border-r border-slate-800 pr-4">
-                            <span class="text-slate-400 font-bold uppercase text-xs mb-1">Tech Productivity</span>
-                            <span class="text-[#facc15] font-black text-2xl tracking-tighter">30m / Day</span>
-                        </div>
-                        <div class="flex flex-col pl-4">
-                            <span class="text-slate-400 font-bold uppercase text-xs mb-1">Fuel Recovery</span>
-                            <span class="text-[#facc15] font-black text-2xl tracking-tighter">15% Gain</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Workflow Management Footer -->
-                <div class="mt-4 p-6 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl">
-                    <h6 class="text-slate-900 text-[18px] font-black mb-2 uppercase tracking-tight">Complete Workflow Management</h6>
-                    <p class="text-slate-600 text-[14px] leading-relaxed font-medium">
-                        Texada delivers purpose-built software that transforms how equipment rental businesses operate. From inventory tracking and field service to e-commerce and analytics, our connected platform helps you manage every asset and maximize every opportunity.
-                    </p>
-                </div>
-
-                <!-- Built for Heavy Equipment Rental Section -->
-                <div class="p-6 bg-slate-900 text-white rounded-2xl shadow-xl">
-                    <h6 class="text-[18px] font-black mb-4 uppercase tracking-tight">Built for Heavy Equipment Rental</h6>
-                    <div class="grid grid-cols-2 gap-y-6 gap-x-4">
-                        <div>
-                            <div class="text-2xl font-black text-[#facc15]">180+</div>
-                            <div class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">years experience</div>
-                        </div>
-                        <div>
-                            <div class="text-2xl font-black text-[#facc15]">60k+</div>
-                            <div class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">users on platform</div>
-                        </div>
-                        <div>
-                            <div class="text-2xl font-black text-[#facc15]">40+</div>
-                            <div class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">years serving industry</div>
-                        </div>
-                        <div>
-                            <div class="text-2xl font-black text-[#facc15]">380+</div>
-                            <div class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">businesses on platform</div>
-                        </div>
-                    </div>
+                <div class="flex flex-col md:flex-row items-center gap-6">
+                    <div class="text-center md:text-right">© 2026 Texada Software | All Rights Reserved</div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="mt-12 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] border-t border-slate-100 pt-8 gap-6">
-            <div class="flex items-center gap-3">
-                <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
-                Secure Business Assessment
-            </div>
-            
-            <div class="flex flex-col md:flex-row items-center gap-6">
-                <div class="text-center md:text-right">© 2026 Texada Software | All Rights Reserved</div>
-            </div>
-        </div>
-    </div>
+        <!-- Logic -->
+        <script>
+            const formatCurrency = (val) => {
+                if (val === "" || val === null || val === undefined) return "";
+                const num = parseFloat(val.toString().replace(/[^0-9.]/g, ''));
+                return isNaN(num) ? '' : new Intl.NumberFormat('en-US', { 
+                    style: 'currency', 
+                    currency: 'USD', 
+                    maximumFractionDigits: 0 
+                }).format(num);
+            };
 
-    <!-- Logic -->
-    <script>
-        const formatCurrency = (val) => {
-            if (val === "" || val === null || val === undefined) return "";
-            const num = parseFloat(val.toString().replace(/[^0-9.]/g, ''));
-            return isNaN(num) ? '' : new Intl.NumberFormat('en-US', { 
-                style: 'currency', 
-                currency: 'USD', 
-                maximumFractionDigits: 0 
-            }).format(num);
-        };
+            const getRawValue = (id) => {
+                const el = document.getElementById(id);
+                return el ? parseFloat(el.value.toString().replace(/[^0-9.]/g, '')) || 0 : 0;
+            };
 
-        const getRawValue = (id) => {
-            const el = document.getElementById(id);
-            return el ? parseFloat(el.value.toString().replace(/[^0-9.]/g, '')) || 0 : 0;
-        };
+            let isMaintManual = false;
 
-        let isMaintManual = false;
+            const calculate = () => {
+                const oec = getRawValue('oec');
+                const rev = getRawValue('annual-rev');
+                const maint = getRawValue('m-spend');
+                const targetUte = parseFloat(document.getElementById('dollar-target').value) || 0;
 
-        const calculate = () => {
-            const oec = getRawValue('oec');
-            const rev = getRawValue('annual-rev');
-            const maint = getRawValue('m-spend');
-            const targetUte = parseFloat(document.getElementById('dollar-target').value) || 0;
+                const fuelExp = getRawValue('fuel-expense');
+                const fuelGainPercent = parseFloat(document.getElementById('fuel-percent-gain').value) || 0;
+                const monthlyReturns = parseFloat(document.getElementById('returns-month').value) || 0;
 
-            const fuelExp = getRawValue('fuel-expense');
-            const fuelGainPercent = parseFloat(document.getElementById('fuel-percent-gain').value) || 0;
-            const monthlyReturns = parseFloat(document.getElementById('returns-month').value) || 0;
+                const accCount = parseFloat(document.getElementById('staff-acc-count').value) || 0;
+                const accHrs = parseFloat(document.getElementById('staff-acc-hours-curr').value) || 0;
+                const accGain = parseFloat(document.getElementById('staff-acc-efficiency').value) || 0;
 
-            const accCount = parseFloat(document.getElementById('staff-acc-count').value) || 0;
-            const accHrs = parseFloat(document.getElementById('staff-acc-hours-curr').value) || 0;
-            const accGain = parseFloat(document.getElementById('staff-acc-efficiency').value) || 0;
+                const techCount = parseFloat(document.getElementById('staff-serv-count').value) || 0;
+                const techRate = parseFloat(document.getElementById('staff-serv-bill-rate').value) || 0;
+                const techReclaim = parseFloat(document.getElementById('staff-serv-daily-reclaim').value) || 0;
+                const techRecovery = parseFloat(document.getElementById('staff-serv-recovery').value) || 0;
 
-            const techCount = parseFloat(document.getElementById('staff-serv-count').value) || 0;
-            const techRate = parseFloat(document.getElementById('staff-serv-bill-rate').value) || 0;
-            const techReclaim = parseFloat(document.getElementById('staff-serv-daily-reclaim').value) || 0;
-            const techRecovery = parseFloat(document.getElementById('staff-serv-recovery').value) || 0;
+                // 1. Revenue utilization Lift
+                const actualNet = Math.max(0, rev - maint);
+                const targetPotential = (targetUte / 100) * oec;
+                const revGain = Math.max(0, targetPotential - actualNet);
 
-            // 1. Revenue utilization Lift
-            const actualNet = Math.max(0, rev - maint);
-            const targetPotential = (targetUte / 100) * oec;
-            const revGain = Math.max(0, targetPotential - actualNet);
+                // 2. Damage and Fuel Recovery
+                const fuelRecoveryVal = fuelExp * (fuelGainPercent / 100);
+                const damageRecoveryVal = (monthlyReturns * 12) * 0.025 * 1000;
+                const totalRecovery = fuelRecoveryVal + damageRecoveryVal;
 
-            // 2. Damage and Fuel Recovery
-            const fuelRecoveryVal = fuelExp * (fuelGainPercent / 100);
-            const damageRecoveryVal = (monthlyReturns * 12) * 0.025 * 1000;
-            const totalRecovery = fuelRecoveryVal + damageRecoveryVal;
+                // 3. Admin Productivity
+                const adminHrsReclaimed = accCount * accHrs * (accGain / 100) * 52;
+                const adminVal = adminHrsReclaimed * 35;
 
-            // 3. Admin Productivity
-            const adminHrsReclaimed = accCount * accHrs * (accGain / 100) * 52;
-            const adminVal = adminHrsReclaimed * 35;
+                // 4. Shop Productivity
+                const shopHrsReclaimed = techCount * (techReclaim / 60) * 5 * 52;
+                const shopVal = shopHrsReclaimed * techRate * (techRecovery / 100);
 
-            // 4. Shop Productivity
-            const shopHrsReclaimed = techCount * (techReclaim / 60) * 5 * 52;
-            const shopVal = shopHrsReclaimed * techRate * (techRecovery / 100);
+                // Update UI
+                const total = revGain + totalRecovery + adminVal + shopVal;
+                document.getElementById('total-val').innerText = formatCurrency(total) || '$0';
+                document.getElementById('res-dollar').innerText = formatCurrency(revGain) || '$0';
+                document.getElementById('res-recovery').innerText = formatCurrency(totalRecovery) || '$0';
+                document.getElementById('res-admin-val').innerText = formatCurrency(adminVal) || '$0';
+                document.getElementById('res-admin-hrs').innerText = Math.round(adminHrsReclaimed).toLocaleString() + " Hrs Reclaimed";
+                document.getElementById('res-shop-val').innerText = formatCurrency(shopVal) || '$0';
+                document.getElementById('res-shop-hrs').innerText = Math.round(shopHrsReclaimed).toLocaleString() + " Hrs Reclaimed";
+            };
 
-            // Update UI
-            const total = revGain + totalRecovery + adminVal + shopVal;
-            document.getElementById('total-val').innerText = formatCurrency(total) || '$0';
-            document.getElementById('res-dollar').innerText = formatCurrency(revGain) || '$0';
-            document.getElementById('res-recovery').innerText = formatCurrency(totalRecovery) || '$0';
-            document.getElementById('res-admin-val').innerText = formatCurrency(adminVal) || '$0';
-            document.getElementById('res-admin-hrs').innerText = Math.round(adminHrsReclaimed).toLocaleString() + " Hrs Reclaimed";
-            document.getElementById('res-shop-val').innerText = formatCurrency(shopVal) || '$0';
-            document.getElementById('res-shop-hrs').innerText = Math.round(shopHrsReclaimed).toLocaleString() + " Hrs Reclaimed";
-        };
+            const updateUte = () => {
+                const oec = getRawValue('oec');
+                const rev = getRawValue('annual-rev');
+                const maint = getRawValue('m-spend');
 
-        const updateUte = () => {
-            const oec = getRawValue('oec');
-            const rev = getRawValue('annual-rev');
-            const maint = getRawValue('m-spend');
+                if (oec === 0 || rev === 0) {
+                    document.getElementById('dollar-curr').value = "";
+                    return;
+                }
 
-            if (oec === 0 || rev === 0) {
-                document.getElementById('dollar-curr').value = "";
-                return;
-            }
+                const base = ((rev - maint) / oec) * 100;
+                const curr = base + 2.18;
+                document.getElementById('dollar-curr').value = curr.toFixed(2);
+                
+                const targetEl = document.getElementById('dollar-target');
+                // Only override target if user hasn't typed in it manually yet
+                if (targetEl.dataset.isManual !== "true") {
+                    targetEl.value = (curr + 5).toFixed(2);
+                }
+            };
 
-            const base = ((rev - maint) / oec) * 100;
-            const curr = base + 2.18;
-            document.getElementById('dollar-curr').value = curr.toFixed(2);
-            
-            const targetEl = document.getElementById('dollar-target');
-            if (!targetEl.value || targetEl.dataset.isManual !== "true") {
-                targetEl.value = (curr + 10).toFixed(2);
-            }
-        };
+            const init = () => {
+                const maintInput = document.getElementById('m-spend');
+                const targetInput = document.getElementById('dollar-target');
 
-        const init = () => {
-            const maintInput = document.getElementById('m-spend');
-            const targetInput = document.getElementById('dollar-target');
+                maintInput.addEventListener('focus', () => { 
+                    isMaintManual = true; 
+                });
 
-            maintInput.onfocus = () => { isMaintManual = true; };
-            targetInput.oninput = () => { targetInput.dataset.isManual = "true"; };
+                // Correctly record manual editing state on typing, even if cleared
+                targetInput.addEventListener('input', () => { 
+                    targetInput.dataset.isManual = "true"; 
+                });
 
-            document.querySelectorAll('input').forEach(input => {
-                input.oninput = () => { 
-                    if (input.id === 'oec' && !isMaintManual) {
-                        const oecVal = getRawValue('oec');
-                        maintInput.value = formatCurrency(Math.round(oecVal * 0.05));
+                document.querySelectorAll('input').forEach(input => {
+                    input.addEventListener('input', () => { 
+                        if (input.id === 'oec' && !isMaintManual) {
+                            const oecVal = getRawValue('oec');
+                            maintInput.value = formatCurrency(Math.round(oecVal * 0.05));
+                        }
+                        
+                        // Only run auto-population if changing OEC or Rental Revenue baselines
+                        if (input.id === 'oec' || input.id === 'annual-rev' || input.id === 'm-spend') {
+                            updateUte(); 
+                        }
+                        calculate(); 
+                    });
+
+                    if (input.classList.contains('currency-input')) {
+                        input.addEventListener('blur', (e) => { 
+                            e.target.value = formatCurrency(e.target.value); 
+                        });
+                        input.addEventListener('focus', (e) => { 
+                            e.target.value = e.target.value.replace(/[^0-9.]/g, ''); 
+                        });
                     }
-                    updateUte(); 
-                    calculate(); 
+                });
+
+                document.getElementById('reset-btn').onclick = () => {
+                    isMaintManual = false;
+                    targetInput.dataset.isManual = "false";
+                    document.querySelectorAll('input').forEach(i => {
+                        if (i.id === 'staff-acc-efficiency') i.value = "50";
+                        else if (i.id === 'staff-serv-daily-reclaim') i.value = "30";
+                        else if (i.id === 'staff-serv-recovery') i.value = "75";
+                        else if (i.id === 'fuel-percent-gain') i.value = "15";
+                        else i.value = "";
+                    });
+                    calculate();
                 };
 
-                if (input.classList.contains('currency-input')) {
-                    input.onblur = (e) => { e.target.value = formatCurrency(e.target.value); };
-                    input.onfocus = (e) => { e.target.value = e.target.value.replace(/[^0-9.]/g, ''); };
-                }
-            });
-
-            document.getElementById('reset-btn').onclick = () => {
-                isMaintManual = false;
-                targetInput.dataset.isManual = "false";
-                document.querySelectorAll('input').forEach(i => {
-                    if (i.id === 'staff-acc-efficiency') i.value = "50";
-                    else if (i.id === 'staff-serv-daily-reclaim') i.value = "30";
-                    else if (i.id === 'staff-serv-recovery') i.value = "75";
-                    else if (i.id === 'fuel-percent-gain') i.value = "15";
-                    else i.value = "";
-                });
                 calculate();
             };
 
-            calculate();
-        };
-
-        init();
-    </script>
-</body>
-</html>
+            init();
+        </script>
+    </body>
+    </html>
